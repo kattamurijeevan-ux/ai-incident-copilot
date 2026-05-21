@@ -1,3 +1,5 @@
+import random
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -42,4 +44,38 @@ def health_check():
     return {
         "status": "healthy",
         "service": "AI Incident Copilot"
+    }
+
+@app.get("/simulate")
+def simulate_logs():
+
+    sample_logs = [
+        "ERROR PaymentService timeout calling Stripe API",
+        "WARN Database connection pool near limit",
+        "ERROR AuthService token validation failed",
+        "INFO User login successful",
+        "ERROR InventoryService failed to update stock",
+        "WARN High API latency detected",
+        "ERROR Kafka consumer disconnected",
+        "INFO Scheduled backup completed"
+    ]
+
+    generated_logs = "\n".join(
+        random.choice(sample_logs)
+        for _ in range(5)
+    )
+
+    parsed_logs = parse_logs(generated_logs)
+
+    incident = detect_incident(parsed_logs)
+
+    report = generate_incident_report(
+        parsed_logs,
+        incident
+    )
+
+    return {
+        "generated_logs": generated_logs,
+        "incident": incident,
+        "report": report
     }
