@@ -16,5 +16,47 @@
     "symptoms": "AuthService token validation failed",
     "root_cause": "Expired auth certificates",
     "fix": "Rotate certificates and restart auth service"
+  },
+  {
+    "title": "Kafka consumer failure",
+    "symptoms": "Kafka consumer disconnected",
+    "root_cause": "Broker communication failure",
+    "fix": "Reconnect consumer and validate broker health"
+  },
+  {
+    "title": "Inventory synchronization failure",
+    "symptoms": "InventoryService failed to update stock",
+    "root_cause": "Inventory database synchronization lag",
+    "fix": "Retry synchronization and inspect replication lag"
+  },
+  {
+    "title": "API latency spike",
+    "symptoms": "High API latency detected",
+    "root_cause": "Traffic spike and insufficient autoscaling",
+    "fix": "Scale API instances and enable caching"
+  },
+  {
+    "title": "Disk storage saturation",
+    "symptoms": "Disk usage exceeded threshold",
+    "root_cause": "Uncleaned log accumulation",
+    "fix": "Rotate logs and increase storage capacity"
+  },
+  {
+    "title": "Redis cache outage",
+    "symptoms": "Redis cache unavailable",
+    "root_cause": "Redis node memory exhaustion",
+    "fix": "Restart Redis and increase memory allocation"
+  },
+  {
+    "title": "Email notification failure",
+    "symptoms": "NotificationService email delivery failed",
+    "root_cause": "SMTP provider outage",
+    "fix": "Fail over to backup SMTP provider"
+  },
+  {
+    "title": "CPU utilization spike",
+    "symptoms": "CPU utilization exceeded 95 percent",
+    "root_cause": "Runaway background processing job",
+    "fix": "Terminate faulty job and optimize workload scheduling"
   }
 ]
