@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Payment API timeout",
+    "symptoms": "PaymentService timeout calling Stripe API",
+    "root_cause": "Third-party payment provider latency",
+    "fix": "Add exponential backoff and retry queue"
+  },
+  {
+    "title": "Database connection exhaustion",
+    "symptoms": "Database connection pool near limit",
+    "root_cause": "Too many concurrent requests",
+    "fix": "Increase DB pool size and optimize queries"
+  },
+  {
+    "title": "Authentication service outage",
+    "symptoms": "AuthService token validation failed",
+    "root_cause": "Expired auth certificates",
+    "fix": "Rotate certificates and restart auth service"
+  }
+]
