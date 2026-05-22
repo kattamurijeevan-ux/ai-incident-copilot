@@ -1,3 +1,5 @@
+from datetime import datetime
+import uuid
 import random
 
 from fastapi import FastAPI
@@ -73,9 +75,11 @@ def simulate_logs():
         parsed_logs,
         incident
     )
-
+    
     return {
-        "generated_logs": generated_logs,
-        "incident": incident,
-        "report": report
-    }
+    "incident_id": str(uuid.uuid4()),
+    "timestamp": datetime.utcnow().isoformat(),
+    "generated_logs": generated_logs,
+    "incident": incident,
+    "report": report
+}
