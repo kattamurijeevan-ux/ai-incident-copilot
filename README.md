@@ -9,7 +9,11 @@ An AI-powered incident analysis and retrieval system built using FastAPI, vector
 - Semantic similarity retrieval using embeddings
 - Confidence-scored historical incident matching
 - REST API using FastAPI
-- RAG-style incident intelligence workflow
+- RAG-style incident intelligence workflow-
+- Simulated production log generation
+- Risk scoring and priority assignment
+- Unique incident IDs and timestamps
+- Top-3 similar incident retrieval with confidence scores
 
 ---
 
