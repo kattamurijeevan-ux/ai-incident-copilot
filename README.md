@@ -127,4 +127,4 @@ http://127.0.0.1:8000/docs
 
 ## API Documentation
 
-![API Docs](screenshots/api:docs.png)
+![API Docs](screenshots/api-docs.png)
