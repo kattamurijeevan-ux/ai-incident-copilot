@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Incident Copilot Dashboard</title>
+</head>
+<body>
+  <h1>AI Incident Copilot</h1>
+
+  <button onclick="simulateIncident()">Simulate Incident</button>
+
+  <h2>Result</h2>
+  <pre id="output">Click the button to simulate an incident...</pre>
+
+  <script>
+    async function simulateIncident() {
+      const output = document.getElementById("output");
+      output.textContent = "Loading...";
+
+      try {
+        const response = await fetch("http://127.0.0.1:8000/simulate");
+        const data = await response.json();
+        output.textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        output.textContent = "Error: " + error;
+      }
+    }
+  </script>
+</body>
+</html>

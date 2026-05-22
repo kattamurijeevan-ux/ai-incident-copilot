@@ -8,9 +8,16 @@ from pydantic import BaseModel
 from app.log_parser import parse_logs
 from app.detector import detect_incident
 from app.llm_agent import generate_incident_report
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="AI Incident Copilot")
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class LogRequest(BaseModel):
     logs: str
