@@ -99,3 +99,22 @@ uvicorn app.main:app --reload
 - Grafana dashboards
 - Docker/Kubernetes deployment
 - ML-based anomaly detection
+---
+
+# Run with Docker
+
+## Build Docker image
+
+```bash
+docker build -t ai-incident-copilot .
+```
+
+## Run Docker container
+
+```bash
+docker run -p 8000:8000 ai-incident-copilot
+```
+
+## Open API Docs
+
+http://127.0.0.1:8000/docs
