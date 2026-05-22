@@ -118,3 +118,13 @@ docker run -p 8000:8000 ai-incident-copilot
 ## Open API Docs
 
 http://127.0.0.1:8000/docs
+
+# Screenshots
+
+## Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+## API Documentation
+
+![API Docs](screenshots/api:docs.png)
