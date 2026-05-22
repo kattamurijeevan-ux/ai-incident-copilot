@@ -1,28 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AI Incident Copilot Dashboard</title>
+  <title>AI Incident Copilot</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f6f8; padding: 30px; }
+    .container { max-width: 1000px; margin: auto; }
+    .card { background: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 8px #ddd; }
+    button { padding: 12px 18px; border: none; border-radius: 8px; background: #2563eb; color: white; font-size: 16px; cursor: pointer; }
+    .badge { display: inline-block; padding: 6px 10px; border-radius: 999px; background: #fee2e2; color: #991b1b; font-weight: bold; }
+    pre { white-space: pre-wrap; background: #111827; color: #d1fae5; padding: 15px; border-radius: 8px; }
+  </style>
 </head>
 <body>
-  <h1>AI Incident Copilot</h1>
+  <div class="container">
+    <h1>AI Incident Copilot Dashboard</h1>
+    <button onclick="simulateIncident()">Simulate Incident</button>
 
-  <button onclick="simulateIncident()">Simulate Incident</button>
-
-  <h2>Result</h2>
-  <pre id="output">Click the button to simulate an incident...</pre>
+    <div id="dashboard"></div>
+  </div>
 
   <script>
     async function simulateIncident() {
-      const output = document.getElementById("output");
-      output.textContent = "Loading...";
+      const container = document.getElementById("dashboard");
+      container.innerHTML = "<p>Loading incident...</p>";
 
-      try {
-        const response = await fetch("http://127.0.0.1:8000/simulate");
-        const data = await response.json();
-        output.textContent = JSON.stringify(data, null, 2);
-      } catch (error) {
-        output.textContent = "Error: " + error;
-      }
+      const response = await fetch("http://127.0.0.1:8000/simulate");
+      const data = await response.json();
+
+      const analysis = data.report.analysis;
+
+      container.innerHTML = `
+        <div class="card">
+          <h2>Incident Summary</h2>
+          <p><strong>Incident ID:</strong> ${data.incident_id}</p>
+          <p><strong>Timestamp:</strong> ${data.timestamp}</p>
+          <p><strong>Severity:</strong> <span class="badge">${data.incident.severity}</span></p>
+          <p><strong>Priority:</strong> ${data.incident.priority}</p>
+          <p><strong>Risk Score:</strong> ${data.incident.risk_score}</p>
+        </div>
+
+        <div class="card">
+          <h2>Root Cause Analysis</h2>
+          <p><strong>Most Likely Root Cause:</strong> ${analysis.most_likely_root_cause}</p>
+          <p><strong>Recommended Fix:</strong> ${analysis.recommended_fix}</p>
+        </div>
+
+        <div class="card">
+          <h2>Generated Logs</h2>
+          <pre>${data.generated_logs}</pre>
+        </div>
+
+        <div class="card">
+          <h2>Similar Historical Incidents</h2>
+          ${analysis.similar_incidents.map(item => `
+            <p>
+              <strong>${item.title}</strong><br>
+              Root cause: ${item.root_cause}<br>
+              Fix: ${item.fix}<br>
+              Confidence: ${item.confidence}
+            </p>
+            <hr>
+          `).join("")}
+        </div>
+      `;
     }
   </script>
 </body>
