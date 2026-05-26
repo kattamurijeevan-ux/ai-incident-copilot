@@ -1,3 +1,4 @@
+from app.rca_agent import generate_rca_report
 from datetime import datetime
 import uuid
 import random
@@ -90,3 +91,41 @@ def simulate_logs():
     "incident": incident,
     "report": report
 }
+@app.get("/simulate-rca")
+def simulate_rca():
+
+    sample_logs = [
+        "ERROR PaymentService timeout calling Stripe API",
+        "WARN Database connection pool near limit",
+        "ERROR AuthService token validation failed",
+        "INFO User login successful",
+        "ERROR InventoryService failed to update stock",
+        "WARN High API latency detected",
+        "ERROR Kafka consumer disconnected",
+        "INFO Scheduled backup completed"
+    ]
+
+    generated_logs = "\n".join(
+        random.choice(sample_logs)
+        for _ in range(6)
+    )
+
+    parsed_logs = parse_logs(generated_logs)
+    incident = detect_incident(parsed_logs)
+    report = generate_incident_report(parsed_logs, incident)
+
+    similar_incidents = report["analysis"]["similar_incidents"]
+
+    rca_report = generate_rca_report(
+        parsed_logs,
+        incident,
+        similar_incidents
+    )
+
+    return {
+        "incident_id": str(uuid.uuid4()),
+        "timestamp": datetime.utcnow().isoformat(),
+        "generated_logs": generated_logs,
+        "incident": incident,
+        "rca_report": rca_report
+    }
