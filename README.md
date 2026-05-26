@@ -14,6 +14,15 @@ An AI-powered incident analysis and retrieval system built using FastAPI, vector
 - Risk scoring and priority assignment
 - Unique incident IDs and timestamps
 - Top-3 similar incident retrieval with confidence scores
+- AI-powered incident severity detection
+- Semantic retrieval of historical incidents using FAISS
+- Risk scoring and incident prioritization
+- Interactive dashboard UI
+- Dockerized deployment
+- Root Cause Analysis (RCA) agent workflow
+- Impacted service detection
+- Incident timeline reconstruction
+- Automated remediation planning
 
 ---
 
@@ -128,3 +137,9 @@ http://127.0.0.1:8000/docs
 ## API Documentation
 
 ![API Docs](screenshots/api-docs.png)
+## RCA Endpoint
+
+Run advanced root cause analysis:
+
+```bash
+GET /simulate-rca
