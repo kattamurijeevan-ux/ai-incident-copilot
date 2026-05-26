@@ -15,6 +15,7 @@
   <div class="container">
     <h1>AI Incident Copilot Dashboard</h1>
     <button onclick="simulateIncident()">Simulate Incident</button>
+<button onclick="runRCA()">Run RCA Analysis</button>
 
     <div id="dashboard"></div>
   </div>
@@ -61,6 +62,52 @@
             </p>
             <hr>
           `).join("")}
+        </div>
+      `;
+    }
+    async function runRCA() {
+      const container = document.getElementById("dashboard");
+      container.innerHTML = "<p>Running RCA analysis...</p>";
+
+      const response = await fetch("http://127.0.0.1:8000/simulate-rca");
+      const data = await response.json();
+
+      const rca = data.rca_report;
+
+      container.innerHTML = `
+        <div class="card">
+          <h2>Root Cause Analysis Report</h2>
+          <p><strong>Incident ID:</strong> ${data.incident_id}</p>
+          <p><strong>Timestamp:</strong> ${data.timestamp}</p>
+          <p><strong>Priority:</strong> ${rca.incident_priority}</p>
+          <p><strong>Risk Score:</strong> ${rca.risk_score}</p>
+          <p><strong>Confidence:</strong> ${rca.confidence}</p>
+        </div>
+
+        <div class="card">
+          <h2>Impacted Services</h2>
+          <p>${rca.impacted_services.join(", ")}</p>
+        </div>
+
+        <div class="card">
+          <h2>Incident Timeline</h2>
+          ${rca.timeline.map(item => `
+            <p><strong>Step ${item.step}:</strong> [${item.severity}] ${item.event}</p>
+          `).join("")}
+        </div>
+
+        <div class="card">
+          <h2>Suspected Root Cause</h2>
+          <p>${rca.suspected_root_cause}</p>
+        </div>
+
+        <div class="card">
+          <h2>Recommended Remediation Plan</h2>
+          <ul>
+            ${rca.recommended_remediation_plan.map(action => `
+              <li>${action}</li>
+            `).join("")}
+          </ul>
         </div>
       `;
     }
