@@ -1,4 +1,5 @@
 from app.rca_agent import generate_rca_report
+from app.postmortem_agent import generate_postmortem
 from datetime import datetime
 import uuid
 import random
@@ -129,3 +130,48 @@ def simulate_rca():
         "incident": incident,
         "rca_report": rca_report
     }
+
+
+@app.get("/simulate-postmortem")
+def simulate_postmortem():
+
+    sample_logs = [
+        "ERROR PaymentService timeout calling Stripe API",
+        "WARN Database connection pool near limit",
+        "ERROR AuthService token validation failed",
+        "INFO User login successful",
+        "ERROR InventoryService failed to update stock",
+        "WARN High API latency detected",
+        "ERROR Kafka consumer disconnected",
+        "INFO Scheduled backup completed"
+    ]
+
+    generated_logs = "\n".join(
+        random.choice(sample_logs)
+        for _ in range(6)
+    )
+
+    parsed_logs = parse_logs(generated_logs)
+    incident = detect_incident(parsed_logs)
+    report = generate_incident_report(parsed_logs, incident)
+
+    similar_incidents = report["analysis"]["similar_incidents"]
+
+    rca_report = generate_rca_report(
+        parsed_logs,
+        incident,
+        similar_incidents
+    )
+
+    incident_id = str(uuid.uuid4())
+    timestamp = datetime.utcnow().isoformat()
+
+    postmortem = generate_postmortem(
+        incident_id,
+        timestamp,
+        generated_logs,
+        incident,
+        rca_report
+    )
+
+    return postmortem
