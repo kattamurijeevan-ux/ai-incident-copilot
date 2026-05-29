@@ -143,3 +143,6 @@ Run advanced root cause analysis:
 
 ```bash
 GET /simulate-rca
+## RCA Dashboard
+
+![RCA Dashboard](screenshots/rca-dashboard.png)
