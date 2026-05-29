@@ -4,25 +4,18 @@ An AI-powered incident analysis and retrieval system built using FastAPI, vector
 
 ## Features
 
-- Log parsing and severity detection
-- Incident classification engine
-- Semantic similarity retrieval using embeddings
-- Confidence-scored historical incident matching
-- REST API using FastAPI
-- RAG-style incident intelligence workflow-
-- Simulated production log generation
-- Risk scoring and priority assignment
-- Unique incident IDs and timestamps
-- Top-3 similar incident retrieval with confidence scores
+## Features
+
 - AI-powered incident severity detection
-- Semantic retrieval of historical incidents using FAISS
+- Semantic incident retrieval using FAISS embeddings
 - Risk scoring and incident prioritization
-- Interactive dashboard UI
-- Dockerized deployment
-- Root Cause Analysis (RCA) agent workflow
+- Interactive FastAPI dashboard
+- Root Cause Analysis (RCA) workflow
 - Impacted service detection
 - Incident timeline reconstruction
 - Automated remediation planning
+- Automated incident postmortem generation
+- Dockerized deployment
 
 ---
 
