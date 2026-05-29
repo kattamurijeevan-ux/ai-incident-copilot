@@ -4,8 +4,6 @@ An AI-powered incident analysis and retrieval system built using FastAPI, vector
 
 ## Features
 
-## Features
-
 - AI-powered incident severity detection
 - Semantic incident retrieval using FAISS embeddings
 - Risk scoring and incident prioritization
