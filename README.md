@@ -134,6 +134,10 @@ http://127.0.0.1:8000/docs
 
 ![Dashboard](screenshots/dashboard.png)
 
+## RCA Dashboard
+
+![RCA Dashboard](screenshots/rca-dashboard.png)
+
 ## API Documentation
 
 ![API Docs](screenshots/api-docs.png)
@@ -143,6 +147,3 @@ Run advanced root cause analysis:
 
 ```bash
 GET /simulate-rca
-## RCA Dashboard
-
-![RCA Dashboard](screenshots/rca-dashboard.png)
